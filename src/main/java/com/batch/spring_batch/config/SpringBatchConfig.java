@@ -34,26 +34,12 @@ public class SpringBatchConfig {
     public FlatFileItemReader<Person> reader() {
         return new FlatFileItemReaderBuilder<Person>()
                 .name("PersonItemReader")
-                .resource(new ClassPathResource("person-1000.csv"))
+                .resource(new ClassPathResource("people-1000.csv"))
                 .linesToSkip(1) // Skip first line as first line is header and not needed
                 .lineMapper(lineMapper())
                 .targetType(Person.class)
                 .build();
     }
-
-    @Bean
-    public PersonProcessor personProcessor() {
-        return new PersonProcessor();
-    }
-
-    @Bean
-    public RepositoryItemWriter<Person> writer() {
-        RepositoryItemWriter<Person> writer = new RepositoryItemWriter<>();
-        writer.setRepository(personRepository);
-        writer.setMethodName("save");
-        return writer;
-    }
-
     private LineMapper<Person> lineMapper() {
         DefaultLineMapper<Person> lineMapper = new DefaultLineMapper<>();
 
@@ -70,6 +56,21 @@ public class SpringBatchConfig {
 
         return lineMapper;
     }
+
+    @Bean
+    public PersonProcessor personProcessor() {
+        return new PersonProcessor();
+    }
+
+    @Bean
+    public RepositoryItemWriter<Person> writer() {
+        RepositoryItemWriter<Person> writer = new RepositoryItemWriter<>();
+        writer.setRepository(personRepository);
+        writer.setMethodName("save");
+        return writer;
+    }
+
+
 
     @Bean
     public Job job(JobRepository jobRepository, Step step) {
