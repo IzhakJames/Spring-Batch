@@ -14,7 +14,7 @@ This project is a Spring Boot application that demonstrates how to use **Spring 
 ## 🛠️ Prerequisites
 - **Java 17**
 - **Maven 3.8+**
-- **Spring Boot 3.4.3**
+- **Spring Boot 3.3.5**
 
 ## 📂 Project Structure
 ```
